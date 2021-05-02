@@ -9,19 +9,17 @@ const button_clear = document.querySelector("[type='reset']");
 const image_change = document.getElementById('image-input');
 const form = document.getElementById("generate-meme");
 
-
-
 //Fires whenever the img object loads a new image (such as with img.src =)
 img.addEventListener('load', () => {
 
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   ctx.fillStyle = 'black';
-
   ctx.fillRect(0, 0, canvas.width, canvas.height);
 
   //const read_text = document.querySelector("reset").disabled = false;
   let bounds = getDimmensions(canvas.width, canvas.height, img.width, img.height);
   ctx.drawImage(img, bounds.startX, bounds.startY, bounds.width, bounds.height);
+
 
   // Some helpful tips:
   // - Fill the whole Canvas with black first to add borders on non-square images, then draw on top
@@ -31,43 +29,37 @@ img.addEventListener('load', () => {
 
 
 //submit
-form.addEventListener('submit', generateMeme);
-
-function generateMeme(event){
+form.addEventListener('submit', function(event) {
   event.preventDefault();
 
-  let top = document.getElementById("text-top").value;
-  let bot = document.getElementById("text-bottom").value;
+  let top = document.getElementById("text-top");
+  let bot = document.getElementById("text-bottom");
 
   ctx.font = '30px Arial';
-  ctx.textAlign = 'center';
-  ctx.strokeText(top, 50, 50);
-  ctx.strokeText(bot, 50, 350);
+  ctx.fillStyle = "#ff0000";
+  ctx.strokeText(top.value, 150, 50);
+  ctx.strokeText(bot.value, 150, 350);
 
   let allow_clear = document.querySelector("[type='reset']").disabled = false;
   let allow_read_text = document.querySelector("[type='button']").disabled = false;
-}
+})
 
 image_change.addEventListener('change', () =>  {
   img.src = URL.createObjectURL(event.target.files[0]);
-  //img.src = URL.createObjectURL(File);
 });
 
 button_clear.addEventListener('click', function(event) {
-  event.preventDefault();
+  //event.preventDefault();
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   button_clear.disabled = true;
-  const allow_read_text = document.querySelector("[type='button']").disabled = true;
+  let allow_read_text = document.querySelector("[type='button']").disabled = true;
 });
-
-
 
 var synth = window.speechSynthesis;
 var voices = [];
 document.getElementById('voice-selection').disabled = false;
 function populateVoiceList() {
   voices = synth.getVoices();
-
   for(var i = 0; i < voices.length ; i++) {
     var option = document.createElement('option');
     option.textContent = voices[i].name + ' (' + voices[i].lang + ')';
@@ -88,15 +80,13 @@ if (speechSynthesis.onvoiceschanged !== undefined) {
 }
 document.getElementById("voice-selection").remove(0);
 
-
 button_read_text.addEventListener('click', function(event) {
 
   event.preventDefault();
   let top = document.getElementById("text-top").value;
   let bot = document.getElementById("text-bottom").value;
-
-  var utterThis = new SpeechSynthesisUtterance(top + bot);
-  var selectedOption = document.getElementById('voice-selection').selectedOptions[0].getAttribute('data-name');
+  let utterThis = new SpeechSynthesisUtterance(top + bot);
+  let selectedOption = document.getElementById('voice-selection').selectedOptions[0].getAttribute('data-name');
   for(var i = 0; i < voices.length ; i++) {
     if(voices[i].name === selectedOption) {
       utterThis.voice = voices[i];
@@ -105,7 +95,7 @@ button_read_text.addEventListener('click', function(event) {
 
   let sound = document.querySelector("[type='range']").value / 100;
   utterThis.volume = sound;
-  synth.speak(utterThis);  
+  speechSynthesis.speak(utterThis);  
 });
 
 
@@ -162,7 +152,8 @@ function getDimmensions(canvasWidth, canvasHeight, imageWidth, imageHeight) {
     height = canvasWidth / aspectRatio;
     // Start the X at the very left since it's max width, but center the height
     startX = 0;
-    startY = (canvasHeight - height) / 2;
+    startY = (canvasHeight - height) / 2;  ctx.fillStyle = 'black';
+
   }
 
   return { 'width': width, 'height': height, 'startX': startX, 'startY': startY }
