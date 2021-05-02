@@ -89,12 +89,25 @@ document.getElementById("voice-selection").remove(0);
 
 
 
-/*const button_read_text = document.querySelector("[type='button']");
-button_read_text.addEventListener('click', function() {
+const button_read_text = document.querySelector("[type='button']");
+button_read_text.addEventListener('click', function(event) {
+
+  event.preventDefault();
   let top = document.getElementById("text-top").value;
   let bot = document.getElementById("text-bottom").value;
   let val = document.querySelector("[type='range']").value;
-});*/
+
+  var utterThis = new SpeechSynthesisUtterance(top + bot);
+  var selectedOption = voiceSelect.selectedOptions[0].getAttribute('data-name');
+  for(var i = 0; i < voices.length ; i++) {
+    if(voices[i].name === selectedOption) {
+      utterThis.voice = voices[i];
+    }
+  }
+
+  synth.volume = val / 100;
+  synth.speak(utterThis);
+});
 
 const slider = document.getElementById('volume-group');
 slider.addEventListener('input', function() {
