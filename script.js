@@ -61,66 +61,40 @@ button_clear.addEventListener('click', function(event) {
 
 
 
-const synth = window.speechSynthesis;
-var voice_select = document.getElementById('voice-selection');
-let voices = [];
-
+var synth = window.speechSynthesis;
+var voices = [];
+document.getElementById('voice-selection').disabled = false;
 function populateVoiceList() {
   voices = synth.getVoices();
 
-  for(var i = 0; i < voices.length; i++) {
+  for(var i = 0; i < voices.length ; i++) {
     var option = document.createElement('option');
     option.textContent = voices[i].name + ' (' + voices[i].lang + ')';
 
     if(voices[i].default) {
       option.textContent += ' -- DEFAULT';
-      console.log(voices[i]);
     }
 
     option.setAttribute('data-lang', voices[i].lang);
     option.setAttribute('data-name', voices[i].name);
-    voice_select.appendChild(option);
-    //console.log(option.textContent);
+    document.getElementById('voice-selection').appendChild(option);
   }
-  //console.log(voices[1]);
 }
 
 populateVoiceList();
 if (speechSynthesis.onvoiceschanged !== undefined) {
   speechSynthesis.onvoiceschanged = populateVoiceList;
 }
+document.getElementById("voice-selection").remove(0);
 
 
 
-const button_read_text = document.querySelector("[type='button']");
+/*const button_read_text = document.querySelector("[type='button']");
 button_read_text.addEventListener('click', function() {
   let top = document.getElementById("text-top").value;
   let bot = document.getElementById("text-bottom").value;
   let val = document.querySelector("[type='range']").value;
-  
-  let utterance = new SpeechSynthesisUtterance(top + bot);
-
-  var selectedOption = voice_select.selectedOptions[0].getAttribute('data-name');
-  
-  //console.log(voice_select);
-  //console.log(voice_select.selectedOptions);
-
-  utterance.lang = 'en-US';
-  console.log(utterance.lang);
-  for(var i = 0; i < voices.length ; i++) {
-    if(voices[i].name === selectedOption) {
-      utterance.voice = voices[i];
-    }
-  }
-
-  utterance.volume = 0;
-  console.log(utterance.volume);
-
-  synth.speak(utterance);
-});
-
-
-
+});*/
 
 const slider = document.getElementById('volume-group');
 slider.addEventListener('input', function() {
