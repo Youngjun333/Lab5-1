@@ -105,6 +105,9 @@ button_read_text.addEventListener('click', function(event) {
     }
   }
 
+  let sound = document.querySelector("[type='range']").value;
+  synth.volume = sound / 100;
+  console.log(synth.volume);
   synth.speak(utterThis);  
 });
 
