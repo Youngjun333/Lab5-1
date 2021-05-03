@@ -11,9 +11,8 @@ const form = document.getElementById("generate-meme");
 
 //Fires whenever the img object loads a new image (such as with img.src =)
 img.addEventListener('load', () => {
-
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
   ctx.fillStyle = 'black';
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
   ctx.fillRect(0, 0, canvas.width, canvas.height);
 
   //const read_text = document.querySelector("reset").disabled = false;
@@ -30,18 +29,19 @@ img.addEventListener('load', () => {
 
 //submit
 form.addEventListener('submit', function(event) {
-  event.preventDefault();
-
   let top = document.getElementById("text-top");
   let bot = document.getElementById("text-bottom");
 
-  ctx.font = '30px Arial';
-  ctx.fillStyle = "#ff0000";
-  ctx.strokeText(top.value, 150, 50);
-  ctx.strokeText(bot.value, 150, 350);
+  ctx.font = '60px Arial';
+  ctx.fillStyle = "white";
+  ctx.textAlign = "center";
+  ctx.fillText(top.value, 200, 50);
+  ctx.fillText(bot.value, 200, 390);
 
   let allow_clear = document.querySelector("[type='reset']").disabled = false;
   let allow_read_text = document.querySelector("[type='button']").disabled = false;
+  event.preventDefault();
+
 })
 
 image_change.addEventListener('change', () =>  {
