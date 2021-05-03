@@ -1,12 +1,4 @@
-/*function ChangeFavicon() {
-  var link = document.querySelector("link[rel*='icon']") || document.createElement('link');
-  link.type = 'image/x-icon';
-  link.rel = 'shortcut icon';
-  link.href = '/favicon.ico';    //path to your icon
-  document.getElementsByTagName('head')[0].appendChild(link);
- }
 
-ChangeFavicon();*/
 
 // script.js
 //Event.preventDefault();
