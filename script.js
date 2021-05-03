@@ -1,4 +1,4 @@
-function ChangeFavicon() {
+/*function ChangeFavicon() {
   var link = document.querySelector("link[rel*='icon']") || document.createElement('link');
   link.type = 'image/x-icon';
   link.rel = 'shortcut icon';
@@ -6,7 +6,7 @@ function ChangeFavicon() {
   document.getElementsByTagName('head')[0].appendChild(link);
  }
 
-ChangeFavicon();
+ChangeFavicon();*/
 
 // script.js
 //Event.preventDefault();
