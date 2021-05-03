@@ -32,11 +32,11 @@ form.addEventListener('submit', function(event) {
   let top = document.getElementById("text-top");
   let bot = document.getElementById("text-bottom");
 
-  ctx.font = '40px Arial';
+  ctx.font = '40px Impact';
   ctx.fillStyle = "white";
   ctx.textAlign = "center";
-  ctx.fillText(top.value, 200, 60);
-  ctx.fillText(bot.value, 200, 360);
+  ctx.fillText(top.value, 200, 50);
+  ctx.fillText(bot.value, 200, 380);
 
   let allow_clear = document.querySelector("[type='reset']").disabled = false;
   let allow_read_text = document.querySelector("[type='button']").disabled = false;
